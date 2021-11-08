@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+package heartbeat_pb;
+import "google/protobuf/descriptor.proto";
+
+option go_package="/heartbeat_pb";
+
+
+message heartbeatOptions {
+    optional int32 opt1 = 1;
+    optional string opt2 = 2;
+}
+
+extend google.protobuf.FieldOptions {
+    optional heartbeatOptions heartbeat_options = 1234;
+}
+  
+
+message HeartBeat {
+    optional int32 a = 1 [(heartbeat_options).opt1 = 123, (heartbeat_options).opt2 = "hhhg"];
+    optional int32 b = 2 [(heartbeat_options) = { opt1: 123 opt2: "hhhg" }];
+}
